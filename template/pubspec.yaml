@@ -8,7 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  quad_engine:
+  quad_engine: ^1.0.1
 
   # path: ^1.8.0
 
