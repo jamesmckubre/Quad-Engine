@@ -1,0 +1,18 @@
+name: template
+description: A template project utilizing Quad Engine.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.2.3
+
+# Add regular dependencies here.
+dependencies:
+  quad_engine:
+
+  # path: ^1.8.0
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  build_web_compilers: ^4.0.9
+  lints: ^2.1.0
