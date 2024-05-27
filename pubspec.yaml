@@ -1,6 +1,6 @@
 name: quad_engine
 description: A lightweight graphics library written in dart. Designed for the fast creation of a wide range of applications.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/jamesmckubre/Quad-Engine
 
 platforms:
