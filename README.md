@@ -1,6 +1,6 @@
 # Quad Engine
 
-Quad Engine is a lightweight graphics rendering engine written in Dart. It is designed to efficiently render quads and utilizes an Entity-Component-System (ECS) architecture for managing entities and their behaviors.
+Quad Engine is a lightweight graphics rendering engine written in Dart with Open GL. It is designed to efficiently render quads and utilizes an Entity-Component-System (ECS) architecture for managing entities and their behaviors.
 
 ## Features
 - Quad Rendering: Efficient rendering of quads with customizable textures and transformations.
@@ -11,12 +11,12 @@ Quad Engine is a lightweight graphics rendering engine written in Dart. It is de
 1. **Install Dart SDK:** If you haven't already, install the Dart SDK on your machine. You can download it from the Dart website and follow the installation instructions for your operating system.
 2. **Clone Repository:** Clone the repository to your local machine.
 ```bash
-git clone https://github.com/your_username/dart-graphics-engine.git
+git clone https://github.com/jamesmckubre/Quad-Engine
 ```
 4. **Template:** Duplicate the template folder included in the repository and rename it. Open the ```pubspec.yaml``` file in your chosen text editor and change whats listed below in ```<>```
 ```yaml
 name: <NAME OF PROJECT>
-description: An absolute bare-bones web app.
+description: A template project utilizing the Quad Engine graphics library.
 version: 1.0.0
 
 ...
@@ -36,7 +36,7 @@ This is the contents of the template ```main.dart``` file. This is a basic empty
 
 
 ```dart
-import 'package:enginepackage/quad_engine.dart';
+import 'package:quad_engine/quad_engine.dart';
 
 class GameScene extends Scene {
 
