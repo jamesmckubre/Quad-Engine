@@ -5,6 +5,8 @@ class Entity {
   List<Entity> children = <Entity>[];
   List<Component> components = <Component>[];
 
+  List<Entity> toDestroy = <Entity>[];
+
   Transform transform;
   late Entity parent;
 
@@ -20,6 +22,10 @@ class Entity {
   void setParent(Entity parent) {
     this.parent = parent;
     transform.setParent(parent.transform);
+  }
+
+  void markForDestruction() {
+    parent.toDestroy.add(this);
   }
 
   Entity addComponent(Component component) {
@@ -46,6 +52,15 @@ class Entity {
 
     for(Entity e in children) {
       e.updateAll(input);
+
+      for(int i=0;i<toDestroy.length;i++) {
+          if(toDestroy[i] == e) {
+            toDestroy.remove(i);
+            children.remove(e);
+
+            print("destroyed");
+          }
+      }
     }
   }
 
@@ -58,6 +73,8 @@ class Entity {
   }
 
   void update(Input input) {
+
+
     for(Component c in components) {
       c.update(input);
     }

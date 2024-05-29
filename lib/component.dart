@@ -14,6 +14,10 @@ class Component {
   Transform getTransform() {
     return parent.transform;
   }
+
+  Entity getParent() {
+    return parent;
+  }
 }
 
 class Camera extends Component {

@@ -54,4 +54,8 @@ class Util {
 
      return Vector3(rr / 255.0, gg / 255.0, bb / 255.0);
    }
+
+   static double map(double value, double istart, double istop, double ostart, double ostop) {
+     return ostart + (ostop - ostart) * ((value - istart) / (istop - istart));
+   }
 }

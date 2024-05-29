@@ -9,6 +9,7 @@ class Transform {
   Vector3 scale = Vector3.all(1.0);
 
   bool forceUpdate = false;
+  bool dontUseParent = false;
 
   Transform([Vector3? pos, Quaternion? rot, Vector3? scale]) {
     if(scale != null) {
@@ -48,9 +49,11 @@ class Transform {
   }
 
   void rotate(Vector3 axis, double angle) {
-    rot = Quaternion.axisAngle(axis, angle)..asRotationMatrix().multiplied(rot.asRotationMatrix())..normalized();
-
     forceUpdate = true;
+
+    Quaternion rotationQuaternion = Quaternion.axisAngle(axis, angle);
+    rot = rotationQuaternion * rot;
+
   }
 
   void position(Vector3 pos) {
@@ -59,7 +62,15 @@ class Transform {
     forceUpdate = true;
   }
 
-  void move(Vector3 dir, double amt) {
+  void move(Vector3 dir, double amt, [Vector3? frozenAxis]) {
+    if(frozenAxis != null) {
+      dir.x *= (1 - frozenAxis.x.abs());
+      dir.y *= (1 - frozenAxis.y.abs());
+      dir.z *= (1 - frozenAxis.z.abs());
+
+      if (dir.length > 0) dir = dir.normalized();
+    }
+
     pos = pos..add(dir.clone()..scale(amt));
 
     forceUpdate = true;
@@ -76,16 +87,20 @@ class Transform {
     return this;
   }
 
+  Vector3 up() {
+    return Vector3(0.0, 1.0, 0.0)..applyQuaternion(rot);
+  }
+
   Vector3 forward() {
-    return rot.asRotationMatrix().forward;
+    return Vector3(0.0, 0.0, 1.0)..applyQuaternion(rot);
   }
   Vector3 backward() {
-    return forward().clone()..applyMatrix3(Matrix3.rotationY((Math.pi / 2.0)*2.0));
+    return Vector3(0.0, 0.0, -1.0)..applyQuaternion(rot);
   }
   Vector3 left() {
-    return forward().clone()..applyMatrix3(Matrix3.rotationY(-(Math.pi / 2.0)));
+    return Vector3(1.0, 0.0, 0.0)..applyQuaternion(rot);
   }
   Vector3 right() {
-    return forward().clone()..applyMatrix3(Matrix3.rotationY(Math.pi / 2.0));
+    return Vector3(-1.0, 0.0, 0.0)..applyQuaternion(rot);
   }
 }
